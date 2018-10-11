@@ -175,7 +175,7 @@ Starting to serve on 127.0.0.1:8001
 
 访问 [http://127.0.0.1:8001/api/v1/namespaces/default/services/productpage:9080/productpage](http://127.0.0.1:8001/api/v1/namespaces/default/services/productpage:9080/productpage) 正常的话会看到 BookInfo 的界面，刷新几次会发现 reviews 这部分会发生变化（对应 v1，v2，v3 三个版本）
 
-### 3. 验证 Mosn 按 version 路由能力
+### 3. 验证 MOSN 按 version 路由能力
 
 首先为 BookInfo 的 service 创建一系列的 destination rules
 ```bash
@@ -190,7 +190,7 @@ $ kubectl apply -f samples/bookinfo/networking/virtual-service-all-v1.yaml
 
 再次访问 [http://127.0.0.1:8001/api/v1/namespaces/default/services/productpage:9080/productpage](http://127.0.0.1:8001/api/v1/namespaces/default/services/productpage:9080/productpage) 发现 reviews 部分不会有「星星」（对应 v1 版本），多刷几次也不会改变
 
-### 4. 验证 Mosn 按 weight 路由能力
+### 4. 验证 MOSN 按 weight 路由能力
 
 我们通过下面操作将 v1 和 v3 版本各分配 50% 的流量
 ```bash
@@ -199,9 +199,9 @@ $ kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-50-v3.yam
 
 再次访问 [http://127.0.0.1:8001/api/v1/namespaces/default/services/productpage:9080/productpage](http://127.0.0.1:8001/api/v1/namespaces/default/services/productpage:9080/productpage) 这次 v1 和 v3 各有 1/2 几率出现
 
-### 5. 验证 Mosn 按照特定 header 路由能力
+### 5. 验证 MOSN 按照特定 header 路由能力
 
-BookInfo 系统右上角有一个登陆的入口，登陆以后请求会带上 `end-user` 这个自定义，值是 user name，Mosn 支持根据这个 header 的值来做路由。比如，我们尝试将 jason 这个用户路由到 v2 版本，其他的路由到 v1 版本
+BookInfo 系统右上角有一个登陆的入口，登陆以后请求会带上 `end-user` 这个自定义，值是 user name，MOSN 支持根据这个 header 的值来做路由。比如，我们尝试将 jason 这个用户路由到 v2 版本，其他的路由到 v1 版本
 
 ```bash
 $ kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml
